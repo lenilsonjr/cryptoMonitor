@@ -25,8 +25,7 @@ class Coin extends Component {
       },
       Portfolio: {
         Quantity: 575,
-        Invested: 70,
-        InvestedCurrency: 'USD',
+        InvestedAt: 0.13,
         Profit: 0,
         ProfitIcon: 'glyphicon glyphicon-minus',
         BTC: 0.0,
@@ -41,7 +40,7 @@ class Coin extends Component {
     //Format: {SubscriptionId}~{ExchangeName}~{FromSymbol}~{ToSymbol}
     //Use SubscriptionId 0 for TRADE, 2 for CURRENT and 5 for CURRENTAGG
     //For aggregate quote updates use CCCAGG as market
-    let subscription = ['5~CCCAGG~XVG~BTC', '5~CCCAGG~XVG~USD'];
+    let subscription = [`5~CCCAGG~${this.state.Symbol}~BTC`, `5~CCCAGG~${this.state.Symbol}~USD`];
     socket.emit('SubAdd', { subs: subscription });
     socket.on("m", function(message) {
       let messageType = message.substring(0, message.indexOf("~"));
@@ -68,7 +67,15 @@ class Coin extends Component {
           ChangeIcon = 'glyphicon glyphicon-chevron-down';
         } else if ( Change > 0) {
           ChangeIcon = 'glyphicon glyphicon-chevron-up';          
-        }  
+        }
+
+        Portfolio.Profit = ((data['PRICE'] - Portfolio.InvestedAt) / Portfolio.InvestedAt * 100).toFixed(2);
+        Portfolio.ProfitIcon = 'glyphicon glyphicon-minus';
+        if ( Portfolio.Profit < 0 ) {
+          Portfolio.ProfitIcon = 'glyphicon glyphicon-chevron-down';
+        } else if ( Portfolio.Profit > 0) {
+          Portfolio.ProfitIcon = 'glyphicon glyphicon-chevron-up';          
+        }
       }
 
       if ( data['TOSYMBOL'] === 'USD' ) {
