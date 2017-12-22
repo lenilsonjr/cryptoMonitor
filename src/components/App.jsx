@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Navbar from './Navbar';
+import Coin from './Coin';
+import '../styles/global.css';
 
 class App extends Component {
 
@@ -12,7 +15,19 @@ class App extends Component {
 
   render() {
     return(
-      <div>cryptoMonitor</div>
+      <div className="app">
+
+        <Navbar />
+      
+        <div className="container-fluid">
+          <div className="row">
+
+            <Coin />            
+
+          </div>
+        </div>
+
+      </div>
     )
   }
 

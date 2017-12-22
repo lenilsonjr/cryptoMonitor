@@ -1,0 +1,34 @@
+.navbar-brand img {
+  width: 20px;
+  background: #ffffff;
+  border-radius: 10px;  
+}
+
+.navbar {
+  border-radius: 0px;
+}
+
+body {
+  background: #000000;
+}
+
+.coin-card {
+  text-align: center;
+  background: #ecf0f1;
+}
+
+.coin-card .glyphicon-chevron-up {
+  color: #2ecc71;
+}
+
+.coin-card .glyphicon-chevron-down {
+  color: #e74c3c;
+}
+
+.coin-card .glyphicon-minus {
+  color: #3498db;
+}
+
+.coin-card img {
+  width: 50px;
+}
