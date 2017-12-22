@@ -20,9 +20,19 @@ class App extends Component {
         <Navbar />
       
         <div className="container-fluid">
-          <div className="row">
+          <div className="row coin-list">
 
-            <Coin />            
+            <Coin />
+
+            <div className="col-md-3">
+
+              <div className="panel panel-default coin-card new-coin">
+                <div className="panel-body">
+                  <span className="glyphicon glyphicon-plus"></span>
+                </div>
+              </div>
+
+            </div>
 
           </div>
         </div>
