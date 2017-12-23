@@ -8,8 +8,29 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: '',
-      dueDate: ''
+      coins: [
+        {
+          CoinName: 'Verge',
+          Symbol: 'XVG',
+          ImageUrl: 'https://www.cryptocompare.com/media/12318032/xvg.png',
+          Quantity: 575,
+          InvestedAt: 0.13
+        },
+        {
+          CoinName: 'NEO',
+          Symbol: 'NEO',
+          ImageUrl: 'https://www.cryptocompare.com/media/1383858/neo.jpg',
+          Quantity: 575,
+          InvestedAt: 0.13
+        },
+        {
+          CoinName: 'Bitcoin',
+          Symbol: 'BTC',
+          ImageUrl: 'https://www.cryptocompare.com/media/19633/btc.png',
+          Quantity: 575,
+          InvestedAt: 0.13
+        }
+      ]
     }
   }
 
@@ -21,8 +42,17 @@ class App extends Component {
       
         <div className="container-fluid">
           <div className="row coin-list">
+            {
+              this.state.coins.map(coin => {
 
-            <Coin />
+                return (
+                  <Coin
+                    key={coin.Symbol}
+                    {...coin}
+                  />
+                )
+              })
+            }
 
             <div className="col-md-3">
 

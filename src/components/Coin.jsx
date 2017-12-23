@@ -8,10 +8,6 @@ class Coin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      CoinName: 'Verge',
-      Symbol: 'XVG',
-      ImageUrl: 'https://www.cryptocompare.com/media/12318032/xvg.png',
-
       OtherCurrency: 'USD',
 
       Change: 0,
@@ -24,8 +20,6 @@ class Coin extends Component {
         USDIcon: 'glyphicon glyphicon-minus'        
       },
       Portfolio: {
-        Quantity: 575,
-        InvestedAt: 0.13,
         Profit: 0,
         ProfitIcon: 'glyphicon glyphicon-minus',
         BTC: 0.0,
@@ -40,7 +34,7 @@ class Coin extends Component {
     //Format: {SubscriptionId}~{ExchangeName}~{FromSymbol}~{ToSymbol}
     //Use SubscriptionId 0 for TRADE, 2 for CURRENT and 5 for CURRENTAGG
     //For aggregate quote updates use CCCAGG as market
-    let subscription = [`5~CCCAGG~${this.state.Symbol}~BTC`, `5~CCCAGG~${this.state.Symbol}~USD`];
+    let subscription = [`5~CCCAGG~${this.props.Symbol}~BTC`, `5~CCCAGG~${this.props.Symbol}~USD`];
     socket.emit('SubAdd', { subs: subscription });
     socket.on("m", function(message) {
       let messageType = message.substring(0, message.indexOf("~"));
@@ -55,7 +49,7 @@ class Coin extends Component {
   handleData(data) {
 
     if (data['PRICE'] !== undefined ) {
-      const quantity = this.state.Portfolio.Quantity;
+      const quantity = this.props.Quantity;
       let Prices = {...this.state.Prices};      
       let Portfolio = {...this.state.Portfolio};
       let {Change, ChangeIcon} = this.state;
@@ -69,7 +63,7 @@ class Coin extends Component {
           ChangeIcon = 'glyphicon glyphicon-chevron-up';          
         }
 
-        Portfolio.Profit = ((data['PRICE'] - Portfolio.InvestedAt) / Portfolio.InvestedAt * 100).toFixed(2);
+        Portfolio.Profit = ((data['PRICE'] - this.props.InvestedAt) / this.props.InvestedAt * 100).toFixed(2);
         Portfolio.ProfitIcon = 'glyphicon glyphicon-minus';
         if ( Portfolio.Profit < 0 ) {
           Portfolio.ProfitIcon = 'glyphicon glyphicon-chevron-down';
@@ -79,7 +73,7 @@ class Coin extends Component {
       }
 
       if ( data['TOSYMBOL'] === 'USD' ) {
-        Prices.USD = data['PRICE'];
+        Prices.USD = data['PRICE'].toFixed(4);
         if ( data['FLAGS'] === '1' ) {
           Prices.USDIcon = 'glyphicon glyphicon-chevron-up';
         } else if ( data['FLAGS'] === '2' ) {
@@ -87,7 +81,7 @@ class Coin extends Component {
         } else {
           Prices.USDIcon = 'glyphicon glyphicon-minus';          
         }
-        Portfolio.USD = data['PRICE'] * quantity;
+        Portfolio.USD = (data['PRICE'] * quantity).toFixed(4);
       } else if ( data['TOSYMBOL'] === 'BTC' ) {
         Prices.BTC = data['PRICE'];
         if ( data['FLAGS'] === '1' ) {
@@ -97,7 +91,7 @@ class Coin extends Component {
         } else {
           Prices.BTCIcon = 'glyphicon glyphicon-minus';          
         }
-        Portfolio.BTC = data['PRICE'] * quantity;        
+        Portfolio.BTC = (data['PRICE'] * quantity).toFixed(4);
       }
 
       this.setState({ Change, ChangeIcon, Portfolio, Prices });
@@ -111,10 +105,10 @@ class Coin extends Component {
       <div className="col-md-3">
         <div className="panel panel-default coin-card">
           <div className="panel-body">
-            <img src={ this.state.ImageUrl } alt={this.state.Symbol} />
+            <img src={ this.props.ImageUrl } alt={this.props.Symbol} />
             <br />
-            <span className="label label-primary">{ this.state.Symbol }</span>
-            <h3><small>You have</small> ${this.state.Portfolio.USD} <small>or</small> { this.state.Portfolio.Quantity } <small>{ this.state.CoinName }</small></h3>
+            <span className="label label-primary">{ this.props.Symbol }</span>
+            <h3><small>You have</small> ${this.state.Portfolio.USD} <small>or</small> { this.props.Quantity } <small>{ this.props.CoinName }</small></h3>
             <hr/>
             <div className="row">
 
