@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addCoin } from '../actions';
 import '../styles/global.css'
 
 class NewCoin extends Component {
@@ -17,7 +19,7 @@ class NewCoin extends Component {
   }
 
   addCoin() {
-    console.log(this.state);
+    this.props.addCoin(this.state.CoinName, this.state.Symbol, this.state.ImageUrl, this.state.Quantity, this.state.InvestedAt);
   }
 
   componentDidMount() {
@@ -109,4 +111,10 @@ class NewCoin extends Component {
 
 }
 
-export default NewCoin;
+function mapStateToProps(state) {
+  return {
+    coins: state
+  }
+}
+
+export default connect(mapStateToProps, { addCoin })(NewCoin);
