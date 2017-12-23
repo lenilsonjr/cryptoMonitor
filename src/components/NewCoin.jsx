@@ -6,9 +6,18 @@ class NewCoin extends Component {
   constructor(props){
     super(props);
     this.state = {
-      coins: {},
-      baseImg: ''
+      Coins: {},
+      BaseImg: '',
+      CoinName: '',
+      Symbol: '',
+      ImageUrl: '',
+      Quantity: '',
+      InvestedAt: ''
     }
+  }
+
+  addCoin() {
+    console.log(this.state);
   }
 
   componentDidMount() {
@@ -19,15 +28,15 @@ class NewCoin extends Component {
     })
     .then(response => response.json())
     .then(json => {
-      const baseImg = json.BaseImageUrl;
-      const coins = json.Data;
-      this.setState({coins, baseImg});
+      const BaseImg = json.BaseImageUrl;
+      const Coins = json.Data;
+      this.setState({Coins, BaseImg});
     });
 
   }
 
   renderOptions() {
-    const coins = this.state.coins;
+    const coins = this.state.Coins;
     let coinOptions = []
     Object.keys(coins).forEach(function (key) {
       let coin = coins[key];
@@ -36,10 +45,17 @@ class NewCoin extends Component {
     return(
       <select
         className="form-control"
+        onChange={ event => this.setCoin(event.target.value) }        
       >
       { coinOptions }
       </select>
     )
+  }
+
+  setCoin(coin) {
+    let { Symbol, CoinName, ImageUrl } = this.state.Coins[coin];
+    ImageUrl = `${this.state.BaseImg}${ImageUrl}`;
+    this.setState({ Symbol, CoinName, ImageUrl });
   }
 
   render() {
@@ -52,9 +68,12 @@ class NewCoin extends Component {
             <div className="form-group">
               <span>I bought</span>
               <input
-                type="text"
+                type="number"
+                min="0"
+                step="0.00001"                
                 placeholder="5000"
                 className="form-control"
+                onChange={ event => this.setState({Quantity: event.target.value}) }
               />
               <span>of</span>
               { this.renderOptions() }
@@ -62,14 +81,16 @@ class NewCoin extends Component {
               <input
                 type="number"
                 min="0"
-                step="0.0001"
+                step="0.00001"
                 placeholder="0.30"
                 className="form-control"
+                onChange={ event => this.setState({InvestedAt: event.target.value}) }                
               />
               <span>USD</span>
             </div>
             <button 
               className="btn btn-default"
+              onClick={ () => this.addCoin()}
             >
               <span className="glyphicon glyphicon-plus"></span> Add to portfolio
             </button>
