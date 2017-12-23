@@ -34,7 +34,7 @@ class Coin extends Component {
     //Format: {SubscriptionId}~{ExchangeName}~{FromSymbol}~{ToSymbol}
     //Use SubscriptionId 0 for TRADE, 2 for CURRENT and 5 for CURRENTAGG
     //For aggregate quote updates use CCCAGG as market
-    let subscription = [`5~CCCAGG~${this.props.Symbol}~BTC`, `5~CCCAGG~${this.props.Symbol}~USD`];
+    let subscription = this.props.Symbol === 'BTC' ? [`5~CCCAGG~${this.props.Symbol}~USD`] : [`5~CCCAGG~${this.props.Symbol}~BTC`, `5~CCCAGG~${this.props.Symbol}~USD`];
     socket.emit('SubAdd', { subs: subscription });
     socket.on("m", function(message) {
       let messageType = message.substring(0, message.indexOf("~"));
