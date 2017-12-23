@@ -35,7 +35,26 @@ body {
 
 .new-coin {
   background: #0000;
-  font-size: 40px;
+  font-size: 15px;
   color: #2ecc71;
-  padding: 40px;
+  padding: 30px;
+  border: #2ecc71 1px dotted;
+}
+
+.new-coin input, .new-coin select {
+  background: transparent;
+  border: #2ecc71 1px dotted;
+  width: 90px!important;  
+  margin-bottom: 3px;
+}
+
+.new-coin span {
+  padding: 4px;
+}
+
+.new-coin .btn {
+  margin: 20px;
+  background: transparent;
+  color: #2ecc71;
+  border: #2ecc71 1px solid;  
 }

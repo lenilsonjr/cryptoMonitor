@@ -44,7 +44,7 @@ class NewCoin extends Component {
     })
     return(
       <select
-        className="form-control"
+        className="form-control input-sm"
         onChange={ event => this.setCoin(event.target.value) }        
       >
       { coinOptions }
@@ -61,39 +61,43 @@ class NewCoin extends Component {
   render() {
     return(
 
-      <div className="col-md-3">
+      <div className="col-md-6 col-md-offset-3">
       
         <div className="panel panel-default coin-card new-coin">
           <div className="panel-body">
-            <div className="form-group">
-              <span>I bought</span>
-              <input
-                type="number"
-                min="0"
-                step="0.00001"                
-                placeholder="5000"
-                className="form-control"
-                onChange={ event => this.setState({Quantity: event.target.value}) }
-              />
-              <span>of</span>
-              { this.renderOptions() }
-              <span>at</span>
-              <input
-                type="number"
-                min="0"
-                step="0.00001"
-                placeholder="0.30"
-                className="form-control"
-                onChange={ event => this.setState({InvestedAt: event.target.value}) }                
-              />
-              <span>USD</span>
+            <div className="form-inline">
+              <div className="form-group">
+                <span>I bought</span>
+                <input
+                  type="number"
+                  min="0"
+                  step="0.00001"                
+                  placeholder="5000"
+                  className="form-control input-sm"
+                  onChange={ event => this.setState({Quantity: event.target.value}) }
+                />
+                <span>of</span>
+                { this.renderOptions() }
+                <span>at</span>
+                <input
+                  type="number"
+                  min="0"
+                  step="0.00001"
+                  placeholder="0.30"
+                  className="form-control input-sm"
+                  onChange={ event => this.setState({InvestedAt: event.target.value}) }                
+                />
+                <span>USD</span>
+              </div>
+              <div className="form-group">              
+                <button 
+                  className="btn btn-default"
+                  onClick={ () => this.addCoin()}
+                >
+                  <span className="glyphicon glyphicon-plus"></span> Add to portfolio
+                </button>
+              </div>
             </div>
-            <button 
-              className="btn btn-default"
-              onClick={ () => this.addCoin()}
-            >
-              <span className="glyphicon glyphicon-plus"></span> Add to portfolio
-            </button>
           </div>
         </div>
 
