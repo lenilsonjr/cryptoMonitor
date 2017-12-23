@@ -97,7 +97,7 @@ class Coin extends Component {
       this.setState({ Change, ChangeIcon, Portfolio, Prices });
     }
 
-    console.log(data);
+    //console.log(data);
   }
 
   render() {

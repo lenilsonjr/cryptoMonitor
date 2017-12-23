@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar';
 import Coin from './Coin';
+import NewCoin from './NewCoin';
 import '../styles/global.css';
 
 class App extends Component {
@@ -54,15 +55,7 @@ class App extends Component {
               })
             }
 
-            <div className="col-md-3">
-
-              <div className="panel panel-default coin-card new-coin">
-                <div className="panel-body">
-                  <span className="glyphicon glyphicon-plus"></span>
-                </div>
-              </div>
-
-            </div>
+            <NewCoin />
 
           </div>
         </div>
