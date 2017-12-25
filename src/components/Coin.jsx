@@ -10,7 +10,7 @@ class Coin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      OtherCurrency: 'USD',
+      OtherCurrency: 'BTC',
 
       Change: 0,
       ChangeIcon: 'glyphicon glyphicon-minus',
