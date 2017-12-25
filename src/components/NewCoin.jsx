@@ -42,7 +42,8 @@ class NewCoin extends Component {
     let coinOptions = []
     Object.keys(coins).forEach(function (key) {
       let coin = coins[key];
-      coinOptions.push( <option key={ coin.Id } value={ coin.Symbol }>{ coin.CoinName }</option> )
+      if (coin.CoinName !== 'Bitcoin')
+        coinOptions.push( <option key={ coin.Id } value={ coin.Symbol }>{ coin.CoinName }</option> )
     })
     return(
       <select
@@ -85,11 +86,11 @@ class NewCoin extends Component {
                   type="number"
                   min="0"
                   step="0.00001"
-                  placeholder="0.30"
+                  placeholder="0.00001"
                   className="form-control input-sm"
                   onChange={ event => this.setState({InvestedAt: event.target.value}) }                
                 />
-                <span>USD</span>
+                <span>BTC</span>
               </div>
               <div className="form-group">              
                 <button 
