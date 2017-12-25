@@ -12,6 +12,8 @@ class Coin extends Component {
     this.state = {
       OtherCurrency: 'BTC',
 
+      socket: null,
+
       Change: 0,
       ChangeIcon: 'glyphicon glyphicon-minus',
 
@@ -33,6 +35,7 @@ class Coin extends Component {
   componentDidMount() {
     const $this = this;
     let socket = io.connect('https://streamer.cryptocompare.com/');
+    this.setState({ socket });
     //Format: {SubscriptionId}~{ExchangeName}~{FromSymbol}~{ToSymbol}
     //Use SubscriptionId 0 for TRADE, 2 for CURRENT and 5 for CURRENTAGG
     //For aggregate quote updates use CCCAGG as market
@@ -99,10 +102,11 @@ class Coin extends Component {
       this.setState({ Change, ChangeIcon, Portfolio, Prices });
     }
 
-    //console.log(data);
   }
 
   removeCoin(id) {
+    let socket = this.state.socket;
+    socket.removeAllListeners('m');
     this.props.removeCoin(id);    
   }
 
