@@ -13,3 +13,5 @@ npm start
 
 ## Contributing :bulb:
 You can contribue to cryptoMonitor by forking and sending a pull request with your new feature or bug fix.
+
+A huge thanks to [CryptoCompare](https://www.cryptocompare.com/) for making such a wonderful API and Web Socket.
