@@ -1,4 +1,4 @@
-import { ADD_COIN } from '../constants';
+import { ADD_COIN, REMOVE_COIN } from '../constants';
 
 export const addCoin = (CoinName, Symbol, ImageUrl, Quantity, InvestedAt) => {
   const action = {
@@ -8,6 +8,14 @@ export const addCoin = (CoinName, Symbol, ImageUrl, Quantity, InvestedAt) => {
     ImageUrl,
     Quantity,
     InvestedAt
+  }
+  return action;
+}
+
+export const removeCoin = (id) => {
+  const action = {
+    type: REMOVE_COIN,
+    id
   }
   return action;
 }

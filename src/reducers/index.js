@@ -1,4 +1,4 @@
-import { ADD_COIN } from '../constants';
+import { ADD_COIN, REMOVE_COIN } from '../constants';
 import { bake_cookie, read_cookie } from 'sfcookies';
 
 const coin = (action) => {
@@ -13,6 +13,11 @@ const coin = (action) => {
   }
 }
 
+const removeById = (state = [], id) => {
+  const coins = state.filter(coin => coin.id !== id);
+  return coins;
+}
+
 const coins = (state = [], action) => {
   
   let coins = null;
@@ -21,6 +26,10 @@ const coins = (state = [], action) => {
     case ADD_COIN:
       coins = [...state, coin(action)]
       bake_cookie('coins', coins);
+      return coins;
+    case REMOVE_COIN:
+      coins = removeById(state, action.id);
+      bake_cookie('coins', coins);      
       return coins;
     default:
       return state;

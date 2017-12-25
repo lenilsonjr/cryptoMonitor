@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import io from 'socket.io-client';
 import '../styles/global.css';
 import CCC from '../streamer.js';
+import { connect } from 'react-redux';
+import { removeCoin } from '../actions';
 
 class Coin extends Component {
 
@@ -100,9 +102,13 @@ class Coin extends Component {
     //console.log(data);
   }
 
+  removeCoin(id) {
+    this.props.removeCoin(id);    
+  }
+
   render() {
     return(
-      <div className="col-md-3">
+      <div className="col-md-4">
         <div className="panel panel-default coin-card">
           <div className="panel-body">
             <img src={ this.props.ImageUrl } alt={this.props.Symbol} />
@@ -140,6 +146,14 @@ class Coin extends Component {
 
             </div>
           </div>
+          <div className="panel-footer">
+            <button
+              className="btn btn-danger btn-block"
+              onClick={() => this.removeCoin(this.props.id)}
+            >
+              <span className="glyphicon glyphicon-remove"></span> Remove
+            </button>
+          </div>
         </div>
       </div>
     )
@@ -147,4 +161,10 @@ class Coin extends Component {
 
 }
 
-export default Coin;
+function mapStateToProps(state) {
+  return {
+    coins: state
+  }
+}
+
+export default connect(mapStateToProps, { removeCoin })(Coin);
