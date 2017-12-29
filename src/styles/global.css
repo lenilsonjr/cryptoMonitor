@@ -27,15 +27,15 @@ body {
   padding: 0px;
 }
 
-.coin-card .glyphicon-chevron-up {
+.glyphicon-chevron-up {
   color: #2ecc71;
 }
 
-.coin-card .glyphicon-chevron-down {
+.glyphicon-chevron-down {
   color: #e74c3c;
 }
 
-.coin-card .glyphicon-minus {
+.glyphicon-minus {
   color: #3498db;
 }
 
@@ -68,6 +68,10 @@ body {
   background: transparent;
   color: #2ecc71;
   border: #2ecc71 1px solid;  
+}
+
+.btc-price {
+  margin-right: 70px;
 }
 
 .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
