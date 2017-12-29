@@ -15,6 +15,16 @@ body {
 .coin-card {
   text-align: center;
   background: #ecf0f1;
+  border: 0px;
+}
+
+.coin-card .btn-danger {
+  border-radius: 0px;
+  padding: 12px;
+}
+
+.coin-card .panel-footer {
+  padding: 0px;
 }
 
 .coin-card .glyphicon-chevron-up {
@@ -46,6 +56,7 @@ body {
   border: #2ecc71 1px dotted;
   width: 90px!important;  
   margin-bottom: 3px;
+  display: inline;
 }
 
 .new-coin span {
