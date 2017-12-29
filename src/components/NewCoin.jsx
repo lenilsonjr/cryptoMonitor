@@ -31,7 +31,7 @@ class NewCoin extends Component {
     .then(response => response.json())
     .then(json => {
       const BaseImg = json.BaseImageUrl;
-      const Coins = json.Data;
+      const Coins = json.Data
       this.setState({Coins, BaseImg});
     });
 
@@ -40,10 +40,10 @@ class NewCoin extends Component {
   renderOptions() {
     const coins = this.state.Coins;
     let coinOptions = []
-    Object.keys(coins).forEach(function (key) {
+    Object.keys(coins).sort().forEach(function (key) {
       let coin = coins[key];
       if (coin.CoinName !== 'Bitcoin')
-        coinOptions.push( <option key={ coin.Id } value={ coin.Symbol }>{ coin.CoinName }</option> )
+        coinOptions.push( <option key={ coin.Id } value={ coin.Symbol }>{ coin.Symbol } | { coin.CoinName }</option> )
     })
     return(
       <select
