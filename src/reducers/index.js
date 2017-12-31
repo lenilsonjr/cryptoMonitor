@@ -1,5 +1,4 @@
 import { ADD_COIN, REMOVE_COIN } from '../constants';
-import { bake_cookie, read_cookie } from 'sfcookies';
 
 const coin = (action) => {
   let { CoinName, Symbol, ImageUrl, Quantity, InvestedAt } = action;
@@ -21,15 +20,19 @@ const removeById = (state = [], id) => {
 const coins = (state = [], action) => {
   
   let coins = null;
-  state = read_cookie('coins');  
+  const localStorage = window.localStorage;
+  if (localStorage.getItem('cryptomonitorcoins'))
+    state = JSON.parse( localStorage.getItem('cryptomonitorcoins') );
   switch(action.type) {
     case ADD_COIN:
       coins = [...state, coin(action)]
-      bake_cookie('coins', coins);
+      localStorage.removeItem("cryptomonitorcoins");
+      localStorage.setItem('cryptomonitorcoins', JSON.stringify(coins));
       return coins;
     case REMOVE_COIN:
       coins = removeById(state, action.id);
-      bake_cookie('coins', coins);      
+      localStorage.removeItem("cryptomonitorcoins");
+      localStorage.setItem('cryptomonitorcoins', JSON.stringify(coins));
       return coins;
     default:
       return state;
