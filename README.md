@@ -1,7 +1,8 @@
 # cryptoMonitor :chart_with_upwards_trend:
 
-## Usage :moneybag:
-If you're not interested in how the code part works you can go to [cryptomonitor.trade](https://cryptomonitor.trade) to use it for free.
+I made cryptoMonitor [to learn React](https://github.com/lenilsonjr/LearningReact). It uses CryptoCompare's web socket to keep an eye on the positions you insert. :moneybag:
+
+If you need a serious business crypto tracker, I use and recommend [Coin Portfolio](https://www.coin-portfolio.com/). :robot:
 
 ## Running it locally :computer:
 ```
